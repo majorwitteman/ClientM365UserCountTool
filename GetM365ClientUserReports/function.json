@@ -1,0 +1,16 @@
+{
+  "bindings": [
+    {
+      "name": "QueueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "company"
+    },
+    {
+      "name": "userlist",
+      "type": "queue",
+      "direction": "out",
+      "queueName": "userlist"
+    }
+  ]
+}

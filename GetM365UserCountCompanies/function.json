@@ -1,0 +1,16 @@
+{
+  "bindings": [
+    {
+      "name": "Timer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 0 12 15 * *"
+    },
+    {
+      "name": "company",
+      "type": "queue",
+      "queueName": "company",
+      "direction": "out"
+    }
+  ]
+}
