@@ -9,12 +9,10 @@ $filePath = "$env:TEMP\$($QueueItem.recId)-$($QueueItem.company)-userlist.csv"
 
 $QueueItem.userList.foreach( { [pscustomobject]$_ | Select-Object -Property samAccountName, displayName, lastLogonDate }) | Export-Csv -Path $filePath
 
-$credential = [pscredential]::new($Env:AuthSmtpUserName, (ConvertTo-SecureString -String $Env:AuthSmtpPassword -AsPlainText -Force))
-
 $mailParams = @{
     To         = $Env:MailTo
     From       = $Env:MailFrom
-    Subject    = "User list from $($QueueItem.company)"
+    Subject    = "User list from $($QueueItem.recId) $($QueueItem.company)"
     Body       = "See attachment"
     Attachment = $filePath
 }
