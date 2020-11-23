@@ -20,6 +20,8 @@ ConnectWise Manage API version to use; this was built and tested against `2020.4
 Microsoft Graph Client ID for service principal that is in the AdminAgents group and have application permissions for `Reports.Read.All`
 - MsGraphClientSecret  
 Secret for above client
+- MsGraphMailClientTenantId  
+The tenant ID for where to send email from
 - MsGraphMailClientId  
 Microsoft Graph Client ID for service principal that is used to send mail, must have applications for `Mail.Send`
 - MsGraphMailClientSecret  
