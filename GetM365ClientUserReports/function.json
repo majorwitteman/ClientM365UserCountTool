@@ -11,6 +11,12 @@
       "type": "queue",
       "direction": "out",
       "queueName": "userlist"
+    },
+    {
+      "name": "outBlob",
+      "type": "blob",
+      "direction": "out",
+      "path": "csv/{rand-guid}"
     }
   ]
 }

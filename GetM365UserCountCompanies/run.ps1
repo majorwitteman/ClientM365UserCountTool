@@ -19,7 +19,7 @@ $params = @{
     ResponseHeadersVariable = "resHeaders"
     StatusCodeVariable = "resStatus"
     FollowRelLink = $true
-    Uri = "$($cw.Uri)/company/companies?childConditions=types/id=$($Env:CwCompanyTypeId)&fields=id,identifier,name,website,invoiceToEmailAddress"
+    Uri = "$($cw.Uri)/company/companies?childConditions=types/id=$($Env:CwCompanyTypeId)&fields=id,identifier,name,invoiceToEmailAddress,defaultContact"
     ContentType = "application/json"
     Headers = @{
         Authorization = $cw.Auth
@@ -39,4 +39,7 @@ do {
     }
 } until ($resStatus -eq 200 -or $retryCount -gt 5)
 
-$companies.foreach({ Push-OutputBinding -Name "company" -Value $_ })
+$companies.foreach({ 
+    Write-Output "Found company: $($_.id) - $($_.identifier)"
+    Push-OutputBinding -Name "company" -Value $_ 
+})
