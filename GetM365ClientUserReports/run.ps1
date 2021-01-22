@@ -59,7 +59,7 @@ catch {
 
 Write-Output "Report for $($QueueItem.id) - $($QueueItem.identifier) request status code: $resStatus"
 $userList = $report | Select-Object -Property @{n = "DisplayName"; e = { $_."Display Name" } },
-@{n = "samAccountName"; e = { ($_."User Principal Name" -split '@')[0] } },
+@{n = "samAccountName"; e = { $_."User Principal Name" } },
 @{n = "lastLogonDate"; e = { Get-Date -Date (.\Shared\Get-UserLatestActivityDate.ps1 -User $_) -Format "M/d/yyyy hh:mm:ss tt" } }
 
 $userListReport = [pscustomobject]@{
@@ -69,4 +69,3 @@ $userListReport = [pscustomobject]@{
 }
 
 Push-OutputBinding -Name outBlob -Value $userListReport
-#Push-OutputBinding -Name "userlist" -Value $userListReport
