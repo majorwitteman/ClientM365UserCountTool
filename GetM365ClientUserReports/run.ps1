@@ -35,7 +35,7 @@ try {
     $token = .\Shared\Get-M365Token.ps1 -Domain $domain
 }
 catch {
-    Write-Error -Message "Could not get token using domain: $domain" -ErrorAction Stop
+    Write-Error -Message "Could not get token using domain: $domain. Exception: $($_.Exception)" -ErrorAction Stop
 }
 
 $reportUri = "https://graph.microsoft.com/v1.0/reports/getOffice365ActiveUserDetail(period='D30')"
