@@ -9,7 +9,7 @@ Write-Host "Queue item insertion time: $($TriggerMetadata.InsertionTime)"
 
 $filePath = "$env:TEMP\$($report.recId)-$($report.company)-userlist.csv"
 
-$report.userList.foreach( { [pscustomobject]$_ | Select-Object -Property samAccountName, displayName, lastLogonDate }) | Export-Csv -Path $filePath
+$report.userList.foreach( { [pscustomobject]$_ | Select-Object -Property samAccountName, displayName, activeDate, source }) | Export-Csv -Path $filePath
 
 $mailParams = @{
     To         = $Env:MailTo
@@ -20,11 +20,11 @@ $mailParams = @{
 }
 
 try {
-    Write-Output "Sending email: $($mailParams.Subject)"
-    .\Shared\Send-GraphMail.ps1 @mailParams -ErrorAction Stop
+    Write-Verbose "Sending email: $($mailParams.Subject)"
+    Send-GraphMail @mailParams -ErrorAction Stop
 }
 catch {
-    throw "Failed to send email: $($_.ErrorDetails.Message)"
+    throw "Failed to send email: $($_.Exception)"
 }
 
 Remove-Item -Path $filePath

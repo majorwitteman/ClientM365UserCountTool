@@ -13,7 +13,7 @@ if ($Timer.IsPastDue) {
 Write-Host "PowerShell timer trigger function ran! TIME: $currentUTCtime"
 
 #$PWD
-$cw = .\Shared\Get-CwObject.ps1
+$cw = Get-CwObject
 
 $params = @{
     ResponseHeadersVariable = "resHeaders"
@@ -40,6 +40,6 @@ do {
 } until ($resStatus -eq 200 -or $retryCount -gt 5)
 
 $companies.foreach({ 
-    Write-Output "Found company: $($_.id) - $($_.identifier)"
+    Write-Verbose "Found company: $($_.id) - $($_.identifier)"
     Push-OutputBinding -Name "company" -Value $_ 
 })
