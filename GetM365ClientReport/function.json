@@ -4,19 +4,13 @@
       "name": "QueueItem",
       "type": "queueTrigger",
       "direction": "in",
-      "queueName": "company"
-    },
-    {
-      "name": "userlist",
-      "type": "queue",
-      "direction": "out",
-      "queueName": "userlist"
+      "queueName": "companyreport"
     },
     {
       "name": "outBlob",
       "type": "blob",
       "direction": "out",
-      "path": "csv/{rand-guid}"
+      "path": "report/{rand-guid}.csv"
     }
   ]
 }
