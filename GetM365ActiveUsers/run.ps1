@@ -26,7 +26,7 @@ catch {
     Write-Error -Message "Could not get token using domain: $domain. Exception: $($_.Exception)" -ErrorAction Stop
 }
 
-$userUri = 'https://graph.microsoft.com/v1.0/users?$filter=(accountEnabled eq true) and (userType eq ''Member'')&$select=userPrincipalName,displayName'
+$userUri = 'https://graph.microsoft.com/v1.0/users?$filter=(accountEnabled eq true)&$select=userPrincipalName,displayName,userType'
 
 $params = @{
     Uri                     = $userUri
@@ -55,7 +55,7 @@ $userListResponse = do {
     else {
         $morePages = $false
     }
-    $userResponse.value
+    $userResponse.value.where{$_.userType -ne "Guest"}
 } until ($retryCount -gt 5 -or $morePages -eq $false)
 
 Write-Verbose "Report for $($QueueItem.id) - $($QueueItem.identifier) request status code: $resStatus"
